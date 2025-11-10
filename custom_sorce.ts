@@ -52,7 +52,7 @@ const MANGA_DB: AL_MangaDetailsById_Media[] = [
     title: { romaji: 'The Beginning After the End', english: 'The Beginning After the End' },
     coverImage: { large: 'https://us-a.tapas.io/sa/f7/16e8def2-901b-45ea-8d86-2aa4b05cc86b_z.jpg', medium: 'https://us-a.tapas.io/sa/f7/16e8def2-901b-45ea-8d86-2aa4b05cc86b_z.jpg' },
     status: 'HIATUS',
-    description: 'A reincarnation fantasy following Arthur Leywin as he navigates a new life filled with magic and intrigue.',
+    description: 'A reincarnation fantasy following Arthur Leywin as he navigates a new life filled with magic and intrigue. Currently on hiatus.',
     chapters: 223,
     volumes: null,
     authors: [{ name: 'TurtleMe' }],
@@ -115,3 +115,27 @@ export default class Provider extends CustomSource {
     return { media: slice, page: p, totalPages, total };
   }
 }
+
+/*
+  NOTES & INTEGRATION GUIDE
+
+  1) To let Seanime use *other providers* for chapter lists, Seanime's manga UI expects an AniList media id
+     when calling ctx.manga.getChapterContainer (see the official docs). If the manga exists on AniList, set
+     `aniListId` below (or set this provider's `id` to that AniList id). When an AniList id is present, other
+     providers (mangadex, manganato, etc.) can resolve chapters more reliably.
+
+  2) If a manga is NOT present on AniList (like many webtoons / OEL works), the app can still search external
+     providers using titles. The `ctx.manga.getChapterContainer` call accepts a `titles` array which helps
+     identify the manga on the external provider. To support that, include rich `title` fields and `year` in
+     the media details so UI plugins and other providers can try title-based matching.
+
+  3) Example fields added to the in-memory DB (see top of file):
+     - `aniListId?: number | null`   // optional AniList ID for cross-provider resolution
+     - `externalLinks?: { site: string; url: string }[]` // useful hints for users & plugins
+
+  4) If you'd like, I can implement a small UI plugin that will expose a "Find chapters via external provider"
+     button on the manga detail page. That plugin would call `ctx.manga.getChapterContainer({ mediaId: <aniListId>, provider: '<providerId>', titles: [<titles>], year: <year> })`
+     and display the returned chapters. This is a reliable fallback when `aniListId` is missing.
+
+  Reference: Seanime Manga UI docs — getChapterContainer and related APIs.
+*/
