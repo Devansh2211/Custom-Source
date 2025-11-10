@@ -10,7 +10,7 @@
   "icon": "",
   "website": "",
   "lang": "en",
-  "payloadURI": "https://raw.githubusercontent.com/Devansh2211/Custom-Source/refs/heads/main/custom_sorce.ts",
+  "payloadURI": "https://raw.githubusercontent.com/Devansh2211/Custom-Source/refs/heads/main/custom_source.ts",
   "provider": {
     "version": "1",
     "permissions": {
