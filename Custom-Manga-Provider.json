@@ -10,7 +10,7 @@
   "icon": "",
   "website": "",
   "lang": "en",
-  "payloadURI": "~/home/devansh/Application/Seanime/custom_sorce.ts",
+  "payloadURI": "/home/devansh/Application/Seanime/custom_sorce.ts",
   "provider": {
     "version": "1",
     "permissions": {
