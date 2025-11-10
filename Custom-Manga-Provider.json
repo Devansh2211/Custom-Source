@@ -17,5 +17,5 @@
       "scopes": ["storage"]
     }
   },
-  "isDevelopment": true
+  "isDevelopment": false
 }
