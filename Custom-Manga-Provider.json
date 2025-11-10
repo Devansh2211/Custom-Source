@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "manifestURI": "",
   "language": "typescript",
-  "type": "content-provider",
+  "type": "Plugin",
   "description": "A small custom manga provider.",
   "author": "Devansh Gupta",
   "icon": "",
