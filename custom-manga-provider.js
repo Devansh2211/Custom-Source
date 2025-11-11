@@ -1,4 +1,4 @@
-// Compiled JS version of the provider (no TypeScript syntax)
+// CommonJS-compatible provider file for Seanime (no TypeScript, no ESM export)
 
 const MANGA_DB = [
   {
@@ -18,59 +18,70 @@ const MANGA_DB = [
   }
 ];
 
-export default class Provider {
-  // provider settings
-  getSettings() {
-    return { supportsAnime: false, supportsManga: true };
-  }
+function Provider() {}
 
-  // Return base info for a set of IDs
-  async getManga(ids) {
-    const results = [];
-    for (const id of ids) {
-      const found = MANGA_DB.find((m) => m.id === id);
-      if (found) {
-        results.push({
-          id: found.id,
-          title: found.title,
-          coverImage: found.coverImage,
-          status: found.status,
-          description: found.description
-        });
-      }
-    }
-    return results;
-  }
+Provider.prototype.getSettings = function () {
+  return { supportsAnime: false, supportsManga: true };
+};
 
-  // Return a full details object for a single manga ID
-  async getMangaDetails(id) {
-    return MANGA_DB.find((m) => m.id === id) || null;
-  }
-
-  // Provide a paginated search/list endpoint
-  async listManga(search, page, perPage) {
-    const q = (search || '').trim().toLowerCase();
-    let filtered = MANGA_DB;
-    if (q.length > 0) {
-      filtered = MANGA_DB.filter((m) => {
-        const r = (m.title.romaji || '').toLowerCase();
-        const e = (m.title.english || '').toLowerCase();
-        return r.includes(q) || e.includes(q);
+Provider.prototype.getManga = async function (ids) {
+  const results = [];
+  for (const id of ids) {
+    const found = MANGA_DB.find((m) => m.id === id);
+    if (found) {
+      results.push({
+        id: found.id,
+        title: found.title,
+        coverImage: found.coverImage,
+        status: found.status,
+        description: found.description
       });
     }
+  }
+  return results;
+};
 
-    const total = filtered.length;
-    const totalPages = Math.max(1, Math.ceil(total / perPage));
-    const p = Math.max(1, page);
-    const start = (p - 1) * perPage;
-    const slice = filtered.slice(start, start + perPage).map((m) => ({
-      id: m.id,
-      title: m.title,
-      coverImage: m.coverImage,
-      status: m.status,
-      description: m.description
-    }));
+Provider.prototype.getMangaDetails = async function (id) {
+  return MANGA_DB.find((m) => m.id === id) || null;
+};
 
-    return { media: slice, page: p, totalPages, total };
+Provider.prototype.listManga = async function (search, page, perPage) {
+  const q = (search || '').trim().toLowerCase();
+  let filtered = MANGA_DB;
+  if (q.length > 0) {
+    filtered = MANGA_DB.filter((m) => {
+      const r = (m.title.romaji || '').toLowerCase();
+      const e = (m.title.english || '').toLowerCase();
+      return r.includes(q) || e.includes(q);
+    });
+  }
+
+  const total = filtered.length;
+  const totalPages = Math.max(1, Math.ceil(total / perPage));
+  const p = Math.max(1, page);
+  const start = (p - 1) * perPage;
+  const slice = filtered.slice(start, start + perPage).map((m) => ({
+    id: m.id,
+    title: m.title,
+    coverImage: m.coverImage,
+    status: m.status,
+    description: m.description
+  }));
+
+  return { media: slice, page: p, totalPages, total };
+};
+
+// Export in CommonJS style for loaders that don't accept ESM 'export'
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = Provider;
+}
+
+// Also attach to global for any loader that looks for a global default
+if (typeof globalThis !== 'undefined') {
+  try {
+    globalThis.CustomSourceProvider = Provider;
+    globalThis.default = Provider;
+  } catch (e) {
+    // ignore attach errors
   }
 }
