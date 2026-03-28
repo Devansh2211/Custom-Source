@@ -8,9 +8,7 @@ const MANGA_DB = [
       large: 'https://us-a.tapas.io/sa/f7/16e8def2-901b-45ea-8d86-2aa4b05cc86b_z.jpg',
       medium: 'https://us-a.tapas.io/sa/f7/16e8def2-901b-45ea-8d86-2aa4b05cc86b_z.jpg'
     },
-    status: 'HIATUS',
     description: 'A reincarnation fantasy following Arthur Leywin as he navigates a new life filled with magic and intrigue.',
-    chapters: 225,
     volumes: null,
     authors: [{ name: 'TurtleMe' }],
     genres: ['Fantasy', 'Isekai'],
