@@ -6,12 +6,27 @@ const MANGA_DB = [
     title: { romaji: 'The Beginning After the End', english: 'The Beginning After the End' },
     coverImage: {
       large: 'https://us-a.tapas.io/sa/f7/16e8def2-901b-45ea-8d86-2aa4b05cc86b_z.jpg',
-      medium: 'https://us-a.tapas.io/sa/f7/16e8def2-901b-45ea-8d86-2aa4b05cc86b_z.jpg'
+      medium: 'https://us-a.tapas.io/sa/f7/16e8def2-901b-45ea-8d86-2aa4b05cc86b_z.jpg',
+      small: 'https://us-a.tapas.io/sa/f7/16e8def2-901b-45ea-8d86-2aa4b05cc86b_z.jpg'
     },
     description: 'A reincarnation fantasy following Arthur Leywin as he navigates a new life filled with magic and intrigue.',
     volumes: null,
     authors: [{ name: 'TurtleMe' }],
     genres: ['Fantasy', 'Isekai'],
+    relations: []
+  },
+  {
+    id: 2,
+    title: { romaji: 'Shadow Slave', english: 'Shadow Slave' },
+    coverImage: {
+      large: 'https://static.comix.to/dd3b/i/b/23/6a8d15c045b72.jpg',
+      medium: 'https://static.comix.to/dd3b/i/b/23/6a8d15c045b72.jpg',
+      small: 'https://static.comix.to/dd3b/i/b/23/6a8d15c045b72.jpg'
+    },
+    description: 'Growing up in poverty, Sunny never expected anything good from life. However, even he did not anticipate being chosen by the Nightmare Spell and becoming one of the Awakened - an elite group of people gifted with supernatural powers. Transported into a ruined magical world, he found himself facing against terrible monsters - and other Awakened - in a deadly battle of survival. Whats worse, the divine power he received happened to possess a small, but potentially fatal side effect...',
+    volumes: null,
+    authors: [{ name: 'Seahorse' }],
+    genres: ['Fantasy', 'Action','Comedy'],
     relations: []
   }
 ];
